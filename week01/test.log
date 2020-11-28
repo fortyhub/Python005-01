@@ -1,0 +1,5 @@
+2020-11-28 14:42:00 root     DEBUG    [line: 8] debug message
+2020-11-28 14:42:00 root     INFO     [line: 9] info message
+2020-11-28 14:42:00 root     WARNING  [line: 10] warning message
+2020-11-28 14:42:00 root     ERROR    [line: 11] error message
+2020-11-28 14:42:00 root     CRITICAL [line: 12] critical message
