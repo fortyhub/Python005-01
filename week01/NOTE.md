@@ -45,6 +45,6 @@ datetime.today()
 datetime.now() #都指当前时间
 datetime.today() -timedelta(days=1) #昨天
 ```
-*** timedelta 对象表示两个 date 或者 time 的时间间隔。***
+***timedelta 对象表示两个 date 或者 time 的时间间隔。***
 
 `class datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)`
