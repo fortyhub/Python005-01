@@ -89,3 +89,38 @@ logging.info('info message')
 
 
 ---------------------------------------------
+## 手动实现deamon进程
+###### 实现原理
+*参考* [APUE守护进程](https://developer.aliyun.com/article/41477)
+
+###### 大致路程如下：
+1. 后台运行
+`首次fork，创建父-子进程，使父进程退出`
+
+2. 脱离控制终端，登录会话和进程组
+`通过setsid使子进程成为process group leader、session leader`
+
+3. 禁止进程重新打开控制终端
+`二次fork，创建子-孙进程，使sid不等pid`
+
+4. 关闭打开的文件描述符
+`通常就关闭STDIN、STDOUT和STDERR`
+
+5. 改变当前工作目录
+`防止占用别的路径的working dir的fd，导致一些block不能unmount`
+
+6. 重设umask
+`防止后续子进程继承非默认umask造成奇怪的行为`
+
+7. 处理SIGCHLD信号
+`非必需`
+
+8. 日志
+`输出重定向后，需要有机制放映内部情况`
+
+##### 关于两次fork
+```
+第二个fork不是必须的，只是为了防止进程打开控制终端。
+打开一个控制终端的条件是该进程必须是session leader。第一次fork，setsid之后，子进程成为session leader，进程可以打开终端；第二次fork产生的进程，不再是session leader，进程则无法打开终端。
+也就是说，只要程序实现得好，控制程序不主动打开终端，无第二次fork亦可。
+```
