@@ -124,3 +124,36 @@ logging.info('info message')
 打开一个控制终端的条件是该进程必须是session leader。第一次fork，setsid之后，子进程成为session leader，进程可以打开终端；第二次fork产生的进程，不再是session leader，进程则无法打开终端。
 也就是说，只要程序实现得好，控制程序不主动打开终端，无第二次fork亦可。
 ```
+
+-------------------------------------------------
+## re模块
+##### re模块常用的几种方法
+1. re.match()
+```
+    import re
+    content = '15616396948'
+    re.match('.{11}', content)
+    re.match('.{11}', content).group()
+    re.match('.{11}', content).span()
+```
+*提取字符子串*
+```
+    import re
+    content = 'qiulibo@126.com'
+    re.match('(.*)@(.*)', content).group(1)
+```
+
+2. re.search()
+`re.search("@", "qiulibo@126.com")`
+
+3. re.findall()
+`re.findall("@", "qiulibo@126@163.com")`
+
+***`re.search()`只匹配到第一个结果，`re.findall()`匹配全部的结果***
+
+4. re.sub() *用于字符串的替换*
+`re.sub('\d+', 'abx', '123@123.com')`
+
+5. re.split() *用于字符串的拆分*
+`re.split("@", "123@123.com")`
+`re.split("(@)", "123@123.com")` *保留分割符号本身*
